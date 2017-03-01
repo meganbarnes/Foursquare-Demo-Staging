@@ -15,5 +15,5 @@ hi
 < Where should we look?
 * prompt/near_place
 
-[dubrovnik](place)
+[dubrovnik](location/place)
 * provide/near_place

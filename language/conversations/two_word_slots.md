@@ -9,8 +9,8 @@ can you help?
 < What are you looking for?
 * prompt/query_type
 
-i want [frozen yogurt](type) in [park slope](place)
+i want [frozen yogurt](type) in [park slope](location/place)
 * request/venues
 
-< These are some places for [frozen yogurt](type) in [park slope](place):
+< These are some places for [frozen yogurt](type) in [park slope](location/place):
 * provide/venues

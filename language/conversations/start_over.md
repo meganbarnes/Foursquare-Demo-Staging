@@ -3,7 +3,7 @@ title: start_over
 timestamp: 2016-10-20T11:19:25.725742923-04:00
 ---
 
-i want [dim sum](type) in [pdx](place)
+i want [dim sum](type) in [pdx](location/place)
 * request/venues
 
 < Cool, what are you looking for?

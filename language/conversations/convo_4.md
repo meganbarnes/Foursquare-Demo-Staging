@@ -4,5 +4,5 @@ is there a [pet store](type) near me?
 < Where are you looking?
 * prompt/near_place
 
-in the [lower east side](place)
+in the [lower east side](location/place)
 * provide/near_place

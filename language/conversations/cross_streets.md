@@ -9,8 +9,8 @@ can you help me find food near me?
 < What type of place are you looking for?
 * prompt/query_type
 
-i'm looking for [korean food](type) near [42nd and Lexington](place)
+i'm looking for [korean food](type) near [42nd and Lexington](location/place)
 * request/venues
 
-< Here are some places for [korean food](type) near [42nd and Lexington](place):
+< Here are some places for [korean food](type) near [42nd and Lexington](location/place):
 * provide/venues

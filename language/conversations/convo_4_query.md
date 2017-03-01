@@ -9,5 +9,5 @@ timestamp: 2016-11-08T15:43:51.076471978-05:00
 < Where are you looking?
 * prompt/near_place
 
-[upper west side](place)
+[upper west side](location/place)
 * provide/near_place

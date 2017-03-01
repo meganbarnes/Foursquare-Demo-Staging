@@ -9,7 +9,7 @@ hey i need to find an [apple store](type)
 < Where would you like us to look?
 * prompt/near_place
 
-in [laguna beach](place)
+in [laguna beach](location/place)
 * provide/near_place
 
 

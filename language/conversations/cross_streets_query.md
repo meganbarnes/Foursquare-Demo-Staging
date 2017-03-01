@@ -9,8 +9,8 @@ food near me
 < What type of place would you like to find?
 * prompt/query_type
 
-[asian fusion](type) by [clinton and division, portland](place)
+[asian fusion](type) by [clinton and division, portland](location/place)
 * request/venues
 
-Here are some places for [asian fusion](type) near [clinton and division, portland](place)
+Here are some places for [asian fusion](type) near [clinton and division, portland](location/place)
 * provide/venues

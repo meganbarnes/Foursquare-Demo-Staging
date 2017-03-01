@@ -9,5 +9,5 @@ can you find me a [restaurant](type)?
 < Where are you?
 * prompt/near_place
 
-i'm in [santa monica](place)
+i'm in [santa monica](location/place)
 * provide/near_place

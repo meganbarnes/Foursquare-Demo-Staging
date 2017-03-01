@@ -10,5 +10,5 @@ hi
 < Where would you like us to look?
 * prompt/near_place
 
-[delhi](place)
+[delhi](location/place)
 * provide/near_place

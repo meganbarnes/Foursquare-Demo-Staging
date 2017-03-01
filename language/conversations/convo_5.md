@@ -14,6 +14,6 @@ a [museum](type)
 < Where should we look?
 * prompt/near_place
 
-in [cleveland](place)
+in [cleveland](location/place)
 * provide/near_place
 

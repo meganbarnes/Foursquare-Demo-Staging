@@ -7,5 +7,5 @@
 < Where would you like us to look?
 * prompt/near_place
 
-[amsterdam ave](place)
+[amsterdam ave](location/place)
 * provide/near_place

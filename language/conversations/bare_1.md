@@ -9,5 +9,5 @@ hi
 < What are you looking for?
 * prompt/query_type
 
-[coffee](type) [seattle](place)
+[coffee](type) [seattle](location/place)
 * request/venues

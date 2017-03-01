@@ -9,5 +9,5 @@ where is an [applebees](type)
 < Where are you looking?
 * prompt/near_place
 
-near [1407 broadway, new york ny 10018](place)
+near [1407 broadway, new york ny 10018](location/place)
 * provide/near_place

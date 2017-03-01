@@ -14,5 +14,5 @@ what can you do?
 < Where should we look?
 * prompt/near_place
 
-[cleveland](place)
+[cleveland](location/place)
 * provide/near_place

@@ -9,8 +9,8 @@ i want to find [pizza](type)
 < Where would you like us to look?
 * prompt/near_place
 
-i'm in [crown heights, NY](place)
+i'm in [crown heights, NY](location/place)
 * provide/near_place
 
-< Here are some spots for [pizza](type) in [crown heights, NY](place):
+< Here are some spots for [pizza](type) in [crown heights, NY](location/place):
 * provide/venues

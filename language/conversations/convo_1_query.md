@@ -9,5 +9,5 @@ timestamp: 2016-11-08T15:39:04.835751522-05:00
 < Where should we look?
 * prompt/near_place
 
-[san jose](place)
+[san jose](location/place)
 * provide/near_place

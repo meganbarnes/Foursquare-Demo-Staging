@@ -9,8 +9,8 @@ i want [italian restaurants](type) near me
 < Where are you?
 * prompt/near_place
 
-I'm at [1407 broadway](place)
+I'm at [1407 broadway](location/place)
 * provide/near_place
 
-< We found some [italian restaurants](type) near [1407 broadway](place)
+< We found some [italian restaurants](type) near [1407 broadway](location/place)
 * provide/venues
