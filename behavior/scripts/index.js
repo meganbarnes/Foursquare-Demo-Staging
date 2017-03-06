@@ -60,13 +60,17 @@ exports.handle = function handle(client) {
       var postbackData = client.getPostbackData()
 
       if (postbackData == null) {
-        const place = firstOfEntityRole(client.getMessagePart(), 'place')
+        const place = firstOfEntityRole(client.getMessagePart(), 'location/place')
         if (place) {
           client.updateConversationState({
             near: place,
-            convertedNear: null,
           })
           console.log('User wants venues near:', place.value)
+          if (place.parsed.latitude) {
+            client.updateConversationState({
+              convertedNear: true,
+            })
+          }
         }
       }
     },
@@ -78,87 +82,73 @@ exports.handle = function handle(client) {
   })
 
 
-  const confirmNear = client.createStep({
-    satisfied() {
-      return Boolean(client.getConversationState().convertedNear)
-    },
+  // const confirmNear = client.createStep({
+  //   satisfied() {
+  //     return Boolean(client.getConversationState().convertedNear)
+  //   },
 
-    extractInfo() {
-      let baseClassification = client.getMessagePart().classification.base_type.value
-      if (baseClassification === 'decline') {
-        client.updateConversationState({
-          near: null,
-          convertedNear: false,
-        })
-        return 'init.proceed' // `next` from this step will get called
-      }
+  //   extractInfo() {
+  //     let baseClassification = client.getMessagePart().classification.base_type.value
+  //     if (baseClassification === 'decline') {
+  //       client.updateConversationState({
+  //         near: null,
+  //         convertedNear: false,
+  //       })
+  //       return 'init.proceed' // `next` from this step will get called
+  //     }
 
-      var postbackData = client.getPostbackData()
+  //     var postbackData = client.getPostbackData()
 
-      if (postbackData != null) {
-        client.updateConversationState({
-          near: {
-            value: postbackData.latlon,
-            raw_value: client.getConversationState().near.raw_value,
-            canonicalized: client.getConversationState().near.canonicalized,
-            parsed: client.getConversationState().near.parsed,
-          },
-          convertedNear: true,
-        })
-      }
-    },
+  //     if (postbackData != null) {
+  //       client.updateConversationState({
+  //         near: {
+  //           value: postbackData.latlon,
+  //           raw_value: client.getConversationState().near.raw_value,
+  //           canonicalized: client.getConversationState().near.canonicalized,
+  //           parsed: client.getConversationState().near.parsed,
+  //         },
+  //         convertedNear: true,
+  //       })
+  //     }
+  //   },
 
-    prompt(callback) {
-      if (client.getConversationState().near != null) {
-        getLatLong(client.getConversationState().near.value, (resultBody) => {
-          if (!resultBody || resultBody.statusCode !== 200) {
-            console.log('Error getting lat/lon.')
-            client.updateConversationState({
-              convertedNear: false,
-            })
-            callback()
-          } else {
-            var carouselArray = []
-            var resultLen = 10
-            if (resultBody.resourceSets[0].resources.length < 10) {
-              resultLen = resultBody.resourceSets[0].resources.length
-            }
-            for (var i = 0; i < resultLen; i++) {
-              var  carouselItemData = {
-                'media_url': 'http://maps.google.com/maps/api/staticmap?zoom=12&size=400x400&maptype=road&markers='+resultBody.resourceSets[0].resources[i].point.coordinates[0].toString()+','+resultBody.resourceSets[0].resources[i].point.coordinates[1].toString()+'&sensor=false',
-                'media_type': 'image/png', 
-                'description': '',
-                title: resultBody.resourceSets[0].resources[i].name,
-                actions: [
-                  {
-                    type: 'postback',
-                    text: 'Select location',
-                    payload: {
-                      data: {
-                        action: 'select',
-                        latlon: resultBody.resourceSets[0].resources[i].point.coordinates[0].toString()+','+resultBody.resourceSets[0].resources[i].point.coordinates[1].toString(),
-                      },
-                      version: '1',
-                      stream: 'getVenues',
-                    },
-                  },
-                ],
-              }
-              carouselArray.push(carouselItemData)
-            }
-            if (carouselArray.length > 0) {
-              client.addTextResponse('Are you looking in one of these places? Just checking.')
-              client.addCarouselListResponse({ items: carouselArray })
-            } else {
-              client.addTextResponse(`We're having a hard time finding that location.  Could you clarify?`)
-            }
-            client.done()
-            callback()
-          }
-        })
-      } 
-    }
-  })
+  //   prompt(callback) {
+  //     if (client.getConversationState().near != null) {
+  //             var  carouselItemData = {
+  //               'media_url': 'http://maps.google.com/maps/api/staticmap?zoom=12&size=400x400&maptype=road&markers='+client.getConversationState().near.parsed.latitude.toString()+','+client.getConversationState().near.parsed.longitude.toString()+'&sensor=false',
+  //               'media_type': 'image/png', 
+  //               'description': '',
+  //               title: resultBody.resourceSets[0].resources[i].name,
+  //               actions: [
+  //                 {
+  //                   type: 'postback',
+  //                   text: 'Select location',
+  //                   payload: {
+  //                     data: {
+  //                       action: 'select',
+  //                       latlon: resultBody.resourceSets[0].resources[i].point.coordinates[0].toString()+','+resultBody.resourceSets[0].resources[i].point.coordinates[1].toString(),
+  //                     },
+  //                     version: '1',
+  //                     stream: 'getVenues',
+  //                   },
+  //                 },
+  //               ],
+  //             }
+  //             carouselArray.push(carouselItemData)
+  //           }
+  //           if (carouselArray.length > 0) {
+  //             client.addTextResponse('Are you looking in one of these places? Just checking.')
+  //             client.addCarouselListResponse({ items: carouselArray })
+  //           } else {
+  //             client.addTextResponse(`We're having a hard time finding that location.  Could you clarify?`)
+  //           }
+  //           client.done()
+  //           callback()
+  //         }
+  //       })
+  //     } 
+  //   }
+  // })
 
   const collectQuery = client.createStep({
     satisfied() {
@@ -195,7 +185,7 @@ exports.handle = function handle(client) {
     },
 
     prompt(callback) {
-      getVenues(client.getConversationState().query.value, client.getConversationState().near.value, client.getConversationState().convertedNear, resultBody => {
+      getVenues(client.getConversationState().query.value, client.getConversationState().near.parsed.latitude+","+client.getConversationState().near.parsed.longitude, client.getConversationState().convertedNear, resultBody => {
         if (!resultBody || resultBody.meta.code !== 200) {
           console.log('Error getting venues.')
           callback()
@@ -408,14 +398,12 @@ exports.handle = function handle(client) {
       'request/venues': 'getVenues',
       'provide/near_place': 'getVenues',
       'goodbye': 'reset',
-      'decline': 'reset',
-      'affirmative': 'reset',
       'ask/capabilities': 'provideCapabilities',
     },
     streams: {
       main: 'getVenues',
       hi: [sayHello],
-      getVenues: [collectQuery, collectNear, confirmNear, provideVenues],
+      getVenues: [collectQuery, collectNear, provideVenues],
       ask: [askForConfirmation],
       reset: [askForConfirmation, confirmReset, resetConvo],
       similarVenues: [provideSimilar],
